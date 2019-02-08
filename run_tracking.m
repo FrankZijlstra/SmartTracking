@@ -76,13 +76,7 @@ nUndersampledProfiles = nProfiles/bitrevFactor;
 nReadout = size(kLines,1)/2; % Division by 2 because readout oversampling will be removed
 
 % Calculate radial sampling coordinates
-% TODO: Change to function
-mult = mod(0:nProfiles-1, 2);
-
-r = (fftCenter(nReadout)-nReadout:fftCenter(nReadout)-1) - 1;
-r = r/(nReadout);
-
-coords = r' * exp(pi*0.5i + mult*pi*1i + (pi*1i*(0:nProfiles-1)/nProfiles));
+coords = calculateRadialSamplingCoordinates(nReadout, nProfiles);
 
 % Calculate nufft structures for undersampled radial k-space using the
 % profileIndex's provided (assumes the pattern repeats bitrevFactor times)
